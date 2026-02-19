@@ -1,58 +1,61 @@
-# Pneumonia Detection and Medical Report Generation using Deep Learning and Visual Language Models
+# Pneumonia Detection, Medical Report Generation, and Semantic Image Retrieval (Tasks 1–3)
 
 ## Overview
-This repository presents a two-stage study on automated pneumonia analysis from chest X-ray images:
+This repository contains a three-part medical imaging pipeline built on chest X-ray images (PneumoniaMNIST):
 
-- **Task 1:** Comparative evaluation of deep learning models for pneumonia classification.
-- **Task 2:** Medical report generation using a visual language model (VLM).
+- **Task 1:** Deep learning classification of pneumonia (comparative study)
+- **Task 2:** Medical report generation using a Visual Language Model (MedGemma)
+- **Task 3:** Semantic image retrieval (CBIR) using medical embeddings + FAISS
 
-The work demonstrates both **predictive performance** and **interpretability through multimodal AI**, combining image classification with natural-language medical reasoning.
+The project demonstrates end-to-end competence across **classification**, **multimodal generation**, and **embedding-based retrieval**, which are key components in modern medical AI applications.
 
 ---
 
 ## Task 1 – Pneumonia Detection (CNN / Transformer / Mamba)
+### Goal
+Train and evaluate multiple deep learning models for binary pneumonia detection with rigorous experimental methodology.
 
-### Objective
-Develop and evaluate multiple deep learning architectures for binary pneumonia detection from chest X-ray images, emphasizing rigorous experimental methodology and comparative analysis.
-
-### Models Evaluated
+### Models
 - Simple CNN
 - ResNet-18
 - EfficientNet-B0
-- Vision Transformer (ViT-Tiny)
-- MambaNet (state-space model)
+- ViT-Tiny
+- MambaNet
 
-### Dataset
-- **PneumoniaMNIST** (MedMNIST v2)
-- Standard train/validation/test splits
+### Metrics
+Accuracy, Precision, Recall, F1-score, ROC-AUC, confusion matrix, ROC curves, and failure-case analysis.
 
-### Evaluation Metrics
-- Accuracy
-- Precision
-- Recall
-- F1-score
-- Area Under the ROC Curve (AUC)
-- Confusion matrix and ROC analysis
-
-### Key Outcome
-ViT-Tiny achieved the best overall discrimination performance (highest AUC and F1-score) and was selected as the reference model for Task-2.
+**Outcome:** ViT-Tiny achieved the best overall discrimination performance and was used as a reference model for subsequent tasks.
 
 ---
 
-## Task 2 – Medical Report Generation (Visual Language Model)
-
-### Objective
-Generate natural-language medical impressions from chest X-ray images using a medical-domain visual language model.
+## Task 2 – Medical Report Generation (VLM)
+### Goal
+Generate short radiology-style impressions from chest X-ray images using an open-source medical Visual Language Model.
 
 ### Model
-- **MedGemma 1.5** (`google/medgemma-1.5-4b-it`)
-- Reference classifier: ViT-Tiny (Task-1 best model)
+- **MedGemma 1.5** (`google/medgemma-1.5-4b-it`) with prompt engineering
+- Qualitative comparison against Ground Truth and ViT predictions, including difficult and misclassified cases.
 
-### Highlights
-- Image-to-text medical report generation
-- Prompt engineering and qualitative analysis
-- Comparison of VLM outputs with ground truth labels and CNN predictions
-- Analysis of failure and ambiguous cases
+Outputs include:
+- Prompt strategy documentation
+- Sample generated reports (≥10 images)
+- Task-2 markdown report
+
+---
+
+## Task 3 – Semantic Image Retrieval (CBIR)
+### Goal
+Build a semantic image retrieval system using medical embeddings and a vector database/index.
+
+### Features
+- **Image→Image retrieval:** query X-ray → top-k similar X-rays
+- **Text→Image retrieval:** clinical prompt → relevant images (CLIP-style shared embedding space)
+- **Vector search:** FAISS (`IndexFlatIP`) with cosine similarity
+- **Evaluation:** Precision@k for k ∈ {1,3,5,10}
+- **Visualization:** query + retrieved results saved as figures
+
+
 
 ---
 
