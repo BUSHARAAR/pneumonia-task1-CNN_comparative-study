@@ -1,73 +1,78 @@
-# pneumonia-task1-CNN_comparative-study
-Comparative CNN–Transformer–Mamba study for pneumonia detection (Task-1)
+# Pneumonia Detection and Medical Report Generation using Deep Learning and Visual Language Models
 
-# Pneumonia Detection – Task 1 (Comparative Study)
+## Overview
+This repository presents a two-stage study on automated pneumonia analysis from chest X-ray images:
 
-This repository contains a complete and reproducible solution for **Task 1: CNN Classification with Comprehensive Analysis**.
+- **Task 1:** Comparative evaluation of deep learning models for pneumonia classification.
+- **Task 2:** Medical report generation using a visual language model (VLM).
 
-The work performs a **fair comparative evaluation** of five architectures on the PneumoniaMNIST dataset:
+The work demonstrates both **predictive performance** and **interpretability through multimodal AI**, combining image classification with natural-language medical reasoning.
 
-- Basic CNN (SimpleCNN)
+---
+
+## Task 1 – Pneumonia Detection (CNN / Transformer / Mamba)
+
+### Objective
+Develop and evaluate multiple deep learning architectures for binary pneumonia detection from chest X-ray images, emphasizing rigorous experimental methodology and comparative analysis.
+
+### Models Evaluated
+- Simple CNN
 - ResNet-18
 - EfficientNet-B0
 - Vision Transformer (ViT-Tiny)
-- MambaNet (state-space inspired model)
+- MambaNet (state-space model)
 
-## Dataset
+### Dataset
 - **PneumoniaMNIST** (MedMNIST v2)
-- Official train/validation/test splits
-- Dataset is automatically downloaded via `medmnist`
+- Standard train/validation/test splits
 
-## Data Pipeline
-- Train-split mean/std normalization
-- Medical-aware augmentation:
-  - Brightness/contrast adjustment
-  - Mild rotation (±7°)
-  - Small translation (≤2 px)
-  - Mild Gaussian noise
-- No flips (preserves CXR laterality)
-
-## Training
-- Loss: CrossEntropyLoss
-- Optimizer: AdamW
-- LR Scheduler: CosineAnnealingLR
-- Model selection: Best validation AUC
-- Fully reproducible (fixed seed)
-
-## Evaluation
-Metrics reported on held-out test set:
+### Evaluation Metrics
 - Accuracy
 - Precision
 - Recall
 - F1-score
-- ROC-AUC
-  
+- Area Under the ROC Curve (AUC)
+- Confusion matrix and ROC analysis
 
-Additional analysis:
-- Confusion matrix
-- ROC curve (per model + overlay)
-- Failure case visualization
+### Key Outcome
+ViT-Tiny achieved the best overall discrimination performance (highest AUC and F1-score) and was selected as the reference model for Task-2.
 
+---
 
+## Task 2 – Medical Report Generation (Visual Language Model)
 
+### Objective
+Generate natural-language medical impressions from chest X-ray images using a medical-domain visual language model.
 
-## How to Run
+### Model
+- **MedGemma 1.5** (`google/medgemma-1.5-4b-it`)
+- Reference classifier: ViT-Tiny (Task-1 best model)
 
-### Install dependencies
-```bash
+### Highlights
+- Image-to-text medical report generation
+- Prompt engineering and qualitative analysis
+- Comparison of VLM outputs with ground truth labels and CNN predictions
+- Analysis of failure and ambiguous cases
 
-pip install -r requirements.txt
+---
 
-#Train and evaluate all models
-python pipeline.py \
-  --models simplecnn,resnet18,efficientnet_b0,vit_tiny,mambanet \
-  --epochs 15 \
-  --batch 256
+## Repository Structure
 
-#Outputs
-#All results are saved to:
-outputs_compare/
+---
 
-#Report: A full technical report is available in:
-task1_comparative_report.md
+## Reproducibility
+- Python, PyTorch, Hugging Face Transformers
+- Task-2 requires Hugging Face access to MedGemma (public gated model)
+- All experiments are reproducible using the provided scripts
 
+---
+
+## Disclaimer
+This project is intended for academic and research purposes only.  
+Generated predictions and reports are **not suitable for clinical diagnosis**.
+
+---
+
+## Author
+**Bushara A. R.**  
+Deep Learning | Medical Image Analysis | Explainable & Multimodal AI
