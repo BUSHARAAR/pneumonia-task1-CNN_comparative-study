@@ -57,10 +57,10 @@ Build a semantic image retrieval system using medical embeddings and a vector da
 
 
 
----
+
 
 ## Repository Structure
-.
+---
 ├── task1/
 │ ├── README.md
 │ ├── pipeline.py
