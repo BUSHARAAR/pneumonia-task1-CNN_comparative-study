@@ -50,7 +50,7 @@ Additional analysis:
 ## How to Run
 
 ### Install dependencies
-#```bash
+```bash
 
 pip install -r requirements.txt
 
